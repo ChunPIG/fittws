@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页 - 广州数鹏通科技有限公司</title>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<script type="text/javascript">
+//图片轮换
+function switchPic(pic, isNext) {
+	var source = pic.getAttribute("src"); //format: images/index/index_x.png
+	var number = parseInt(source.charAt(source.indexOf(".") - 1));
+	if (isNext) {
+		number = (number == 3) ? 1 : (number + 1);
+	} else {
+		number = (number == 1) ? 3 : (number - 1);
+	}
+	//source = "images/" + number + ".png";
+	pic.setAttribute("src", source.replace(/\d/, number));
+}
+
+//新闻滚动
+function scrollNewslist() {
+	var slideBox = document.getElementById("news_list");
+    var delay = 1000;			// 停留时间
+    var speed = 100;			// 相对速度（越小越快）
+    var lineHeight = 20;		// 每次滚动多少px，最好与li的lineHeight一致 
+    
+    var tid = null;
+    var pause = false;
+    var start = function() {
+        tid = setInterval(slide, speed);
+    }
+    var slide = function() {
+        if (pause) return;
+        
+        slideBox.scrollTop += 1;
+        if ( slideBox.scrollTop % lineHeight == 0 ) {
+             clearInterval(tid);
+             slideBox.appendChild(slideBox.getElementsByTagName('li')[0]);
+             slideBox.scrollTop = 0;
+             setTimeout(start, delay);
+        }
+    }
+    slideBox.onmouseover = function(){pause=true;}
+    slideBox.onmouseout = function(){pause=false;}
+    setTimeout(start, delay);
+}
+
+
+window.onload = function() {
+	// 给图片两边按钮绑定事件
+	var pics = document.getElementById("pics").getElementsByTagName("img");
+	var pic_main = pics[0];			// 中间展示的大图
+	var pic_left_arrow = pics[1];	// 左边箭头图片
+	var pic_right_arrow = pics[2];	// 右边箭头图片 
+	
+	pic_right_arrow.onclick = function(){switchPic(pic_main,true);};
+	pic_right_arrow.onmouseover = function(){this.setAttribute("src","images/imageright_hover.png");};
+	pic_right_arrow.onmouseout = function(){this.setAttribute("src","images/imageright.png");};
+	pic_left_arrow.onclick = function(){switchPic(pic_main, false); };
+	pic_left_arrow.onmouseover = function(){this.setAttribute("src", "images/imageleft_hover.png");};
+	pic_left_arrow.onmouseout = function() {this.setAttribute("src", "images/imageleft.png");};
+	
+	// 执行新闻滚动脚本 
+	scrollNewslist();
+};
+
+</script>
+
+</head>
+<body>
+	<div id="content">
+    	<div id="header">
+        	<div id="header_content">
+        		<img src="images/logo.png" id="logo" />
+                <ul>
+                	<li class="selected"><a href="index.html">首页</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="overview.html">公司简介</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="solutions.html">解决方案</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="product_domain.html">产品领域</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="service.html">专业服务</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="news_list.html">新闻资讯</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="cooperation.html">战略伙伴</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="contact.html">联系我们</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="jobs.html">加入我们</a></li>
+                </ul>
+                <div id="language">
+                	<img src="images/eng.png" /><span><a href="#">English</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="lineD">
+            <div class="lineout">
+            	<div class="line"></div>
+            </div>
+        </div>
+        <div id="middle">
+        	<div id="pics">
+            	<img src="images/index/index_1.jpg" />
+                <span id="pics_left"><a><img src="images/imageleft.png" /></a></span>
+                <span id="pics_right"><a><img src="images/imageright.png" /></a></span>
+            </div>
+            <div id="news">
+				
+ 				<div id="news_content">
+                	<img src="images/news.png" />
+                    <span class="title"><a href="news_list.html">新闻资讯</a></span>
+                    <div class="news_message">
+                    	<ul id="news_list">
+                        <li><a href="news27.html" target="_blank">【团队活动】春游踏青 顺德长鹿农庄一日游</a><span class="publishtime">2014-04-08</span></li>
+                        <li><a href="news26.html" target="_blank">【团队活动】拥抱变化 专业进取——2014，你好！</a><span class="publishtime">2014-01-19</span></li>
+                        <li><a href="news25.html" target="_blank">【团队活动】暖阳高照 踏雪寻梅</a><span class="publishtime">2014-01-03</span></li>
+                    		<li><a href="news24.html" target="_blank">【团队活动】围炉而坐 话烧烤</a><span class="publishtime">2013-08-12</span></li>
+		                    <li><a href="news10.html" target="_blank">【行业资讯】互联网将与实体经济不可分割</a><span class="publishtime">2014-01-06</span></li>
+                    	</ul>
+                    </div>
+ 				</div>
+ 				
+            </div>
+            <div id="product">
+            	<div class="pro_list">
+					
+ 					<div class="pro" >
+                    	<a href="solutions_FinanceInvestment.html"><img class="proimg" src="images/solutions/finance.jpg" /></a>
+                        <div class="right">
+                        	<span class="protitle"><a href="solutions_FinanceInvestment.html">金融证券解决方案</a></span>
+                        	<ul>
+                        		<li>准确的进行客户分层，实施深度营销；有效的维系客户，制定交叉... </li>
+                            	<li>集成管理、运作和财务报表，改善企业绩效；</li>
+                            	<li>进一步持续性的确保整个企业的收入；</li>
+                        	</ul>
+                            <span class="more"><a href="solutions_FinanceInvestment.html">了解更多</a></span>
+                        </div>
+ 					</div>
+ 					
+                </div>
+            	<div class="pro_list">
+					
+ 					<div class="pro">
+                    	<a href="solutions_MobileCommunication.html"><img class="proimg" src="images/solutions/mobile_comunication.jpg" /></a>
+                        <div class="right">
+                        	<span class="protitle"><a href="solutions_MobileCommunication.html">移动通信解决方案</a></span>
+							<span class="pro_content">公司为电信行业提供新一代业务支撑系统、管理支撑系统、移动定位系统、营销管理系统。服务遍布中国移动、中国电信、中国联通等。...</span>
+                            <span class="more"><a href="solutions_MobileCommunication.html">了解更多</a></span>
+                        </div>
+ 					</div>
+ 					
+                </div>
+            	<div class="pro_list">
+					
+ 					<div class="pro">
+                    	<a href="solutions_MobileInternet.html"><img class="proimg" src="images/solutions/mobile_internet.jpg" /></a>
+                        <div class="right">
+                        	<span class="protitle"><a href="solutions_MobileInternet.html">移动互联解决方案</a></span>
+							<span class="pro_content">未来十年，移动互联网时代用户数的迅猛增长，已是必然趋势。用户数的急速增长，意味着巨大的机会，同时也意味着巨大的挑战，终端的小型化、多样化，接入方式的多样化都意味着...</span>
+                            <span class="more"><a href="solutions_MobileInternet.html">了解更多</a></span>
+                        </div>
+ 					</div>
+ 					
+                </div>
+            	<div class="pro_list">
+					
+ 					<div class="pro">
+                    	<a href="solutions_PublicService.html"><img class="proimg" src="images/solutions/public_service.jpg"/></a>
+                        <div class="right">
+                        	<span class="protitle"><a href="solutions_PublicService.html">公共服务解决方案</a></span>
+                        	<span class="pro_content">公司承担政府部门信息系统建设，提供安全、可靠、高质量、易扩展的行业解决方案。</span>
+                            <span class="more"><a href="solutions_PublicService.html">了解更多</a></span>
+                        </div>
+ 					</div>
+ 					
+                </div> 
+            </div>
+            <div id="solution">
+				
+ 				<div id="solution_content">
+                	<div id="solution_title">
+                    	<img src="images/pro.png"/>
+                        <span class="title"><a href="product_domain.html">产品领域</a></span>
+                    </div>
+                    <div class="clear"></div>
+                    <div id="solution_pics">
+                        <a href="#"><img id="solleft" src="images/proleft.png"/></a>
+                		<ul>
+                			<li>
+                            	<a href="product_domain.html#product_ICD"><img src="images/index/pro-icd-a.png"/></a>
+                                <ul>
+                                	<li class="title"><a href="product_domain.html#product_ICD">智能计算领域</a></li>
+                                	<li class="info">Inteligence Computing Domain</li>
+                                    <!-- <li>智能信息发布平台</li>
+                                    <li>商业智能及数据挖掘平台</li>
+                                    <li>......</li> -->
+                                </ul>
+                                <span><img src="images/proline.png"/></span>
+                            </li>
+                			<li>
+                            	<a href="product_domain.html#product_OMD"><img src="images/index/pro-omd-a.png"/></a>
+                                <ul>
+                                	<li class="title"><a href="product_domain.html#product_OMD">运营管理领域</a></li>
+                                	<li class="info">Operation &amp; Management Domain</li>
+                                    <!-- <li>项目精益管理平台</li>
+                                    <li>自动化办公管理平台</li>
+                                    <li>......</li> -->
+                                </ul>
+                                <span><img src="images/proline.png"/></span>
+                            </li>
+                			<li>
+                            	<a href="product_domain.html#product_GID"><img src="images/index/pro-gid-a.png"/></a>
+                                <ul>
+                                	<li class="title"><a href="product_domain.html#product_GID">地理信息领域</a></li>
+                                	<li class="info">Geographic Information Domain</li>
+                                    <!-- <li>地理信息引擎</li>
+                                    <li>智能加速引擎</li>
+                                    <li>......</li> -->
+                                </ul>
+                                <span><img src="images/proline.png"/></span>
+                            </li>
+                			<li>
+                            	<a href="product_domain.html#product_MID"><img src="images/index/pro-mid-a.png"/></a>
+                                <ul>
+                                	<li class="title"><a href="product_domain.html#product_MID">移动互联领域</a></li>
+                                	<li class="info">Mobile Internet Domain</li>
+                                    <!-- <li>社交媒体开发平台</li>
+                                    <li>Andrido/IOS安卓移动开发平台</li> -->
+                                </ul>
+                            </li>
+                		</ul>
+                        <a href="#"><img id="solright" src="images/proright.png"/></a>
+                    </div>
+ 				</div>
+ 				
+            </div>
+        </div>
+        <div class="lineD">
+            <div class="lineout">
+            	<div class="line"></div>
+            </div>
+        </div>
+        <div id="footer">
+         	<div id="footer_content">
+            	<div style="width:100%;height:210px;">
+            		<img src="images/logo-1.png"/>
+                	<ul>
+                		<li class="links">
+                    		<ul>
+                        		<li class="links_title">我们的服务</li>
+                            	<li class="link"><a href="service.html#service_businessConsulting">商业咨询</a></li>
+                            	<li class="link"><a href="service.html#service_softwareDevelopment">软件开发</a></li>
+                            	<li class="link"><a href="service.html#service_dataService">数据服务</a></li>
+                            	<li class="link"><a href="service.html#service_operationsManagementService">运营管理服务</a></li>
+                        	</ul>
+                    	</li>
+                    	<li class="links">
+                    		<ul>
+                        		<li class="links_title">我们的产品</li>
+                        		<li class="link"><a href="product_domain.html#product_ICD">智能计算领域</a></li>
+                        		<li class="link"><a href="product_domain.html#product_OMD">运营管理领域</a></li>
+                        		<li class="link"><a href="product_domain.html#product_GID">地理信息领域</a></li>
+                        		<li class="link"><a href="product_domain.html#product_MID">移动互联领域</a></li>
+                        	</ul>
+                   		</li>
+                    	<li class="links">
+                    		<ul>
+                        		<li class="links_title">联系方式</li>
+                            	<li class="link"><a href="mailto:sales@linkcm.com">销售业务sales@linkcm.com</a></li>
+                            	<li class="link"><a href="mailto:support@linkcm.com">售后服务support@linkcm.com</a></li>
+                            	<li class="link"><a href="mailto:hr@linkcm.com">人才招聘hr@linkcm.com</a></li>
+                        	</ul>
+                    	</li>
+                	</ul>
+                </div>
+                <div id="bottom">
+                	<span class="street">粤ICP备11071503号-1<span>版权所有 &copy;广州数鹏通科技有限公司</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

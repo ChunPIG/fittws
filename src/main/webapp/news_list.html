@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新闻资讯 - 广州数鹏通科技有限公司</title>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/detais.css" />
+<script type="text/javascript">
+	function hasClass(obj, cls) {
+		return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+	}
+
+	function addClass(obj, cls) {
+		if (!this.hasClass(obj, cls))
+			obj.className += " " + cls;
+	}
+
+	function removeClass(obj, cls) {
+		if (hasClass(obj, cls)) {
+			var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+			obj.className = obj.className.replace(reg, ' ');
+		}
+	}
+	
+	// 初始化
+	function init() {
+		var page_len = 6; //每页显示page_len条新闻
+		var page_num = 1;
+
+		// 获取新闻列表 
+		var ele_ul = document.getElementById("newslist");
+		var newslist = ele_ul.getElementsByTagName("li");
+
+		// 生成翻页按钮
+		var page_btn_nums = Math.ceil(newslist.length / page_len);
+		var page_btns = Array(page_btn_nums);
+		for ( var i = 0; i < page_btn_nums; i++) {
+			var page_btn = createPageButton(i + 1);
+			page_btn.onclick = function() {
+				page_num = parseInt(this.innerHTML);
+				show(newslist, page_num, page_len);
+			};
+			page_btns[i] = page_btn;
+		}
+
+		var page_pre = createPageButton("上一页");
+		page_pre.onclick = function() {
+			if (page_num > 1) {
+				show(newslist, --page_num, page_len);
+			}
+		};
+
+		var page_next = createPageButton("下一页");
+		page_next.onclick = function() {
+			if (page_num < page_btn_nums) {
+				show(newslist, ++page_num, page_len);
+			}
+		};
+
+		var container = document.getElementById("newslist_page").getElementsByTagName("span")[0];
+		var old_btns = container.getElementsByTagName("a");
+		while (old_btns.length > 0) {
+			container.removeChild(old_btns[0]);
+		}
+
+		container.appendChild(page_pre);
+		for ( var i = 0; i < page_btn_nums; i++) {
+			container.appendChild(page_btns[i]);
+		}
+		container.appendChild(page_next);
+		
+		// 显示
+        show(newslist, 1, page_len);
+	}
+
+	// 显示列表
+	function show(newslist, page_num, len) {
+		if (newslist == null || newslist.length < len) return;
+		if (page_num < 1) return;
+
+		//显示 [from, to)
+		var from = (page_num - 1) * len;
+		var to = from + len;
+		for ( var i = 0; i < newslist.length; i++) {
+			if (i >= from && i < to) {
+				newslist[i].style.display = "";
+			} else {
+				newslist[i].style.display = "none";
+			}
+		}
+		
+		var page_btns = document.getElementById("newslist_page").getElementsByTagName("a");
+		for (var i = 1; i < page_btns.length - 1; i++) {
+            removeClass(page_btns[i], "current");
+            if (i == page_num) {
+                addClass(page_btns[i], "current");
+            }
+        }
+	}
+	
+
+	// 创建翻页按钮 
+	function createPageButton(text) {
+		var btn = document.createElement("a");
+		btn.setAttribute("href", "#newslist_top");
+		var txt = document.createTextNode(text);
+		btn.appendChild(txt);
+		return btn;
+	}
+
+	window.onload = function() {
+		init();
+	};
+</script>
+</head>
+<body>
+	<div id="content">
+		<div id="header">
+			<div id="header_content">
+        		<img src="images/logo.png" id="logo" />
+                <ul>
+                	<li><a href="index.html">首页</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="overview.html">公司简介</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="solutions.html">解决方案</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="product_domain.html">产品领域</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="service.html">专业服务</a><span><img src="images/crossline.png" /></span></li>
+                    <li class="selected"><a href="news_list.html">新闻资讯</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="cooperation.html">战略伙伴</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="contact.html">联系我们</a><span><img src="images/crossline.png" /></span></li>
+                    <li><a href="jobs.html">加入我们</a></li>
+                </ul>
+                <div id="language">
+                	<img src="images/eng.png" /><span><a href="#">English</a></span>
+                </div>
+            </div>
+		</div>
+		<div class="lineD">
+			<div class="lineout">
+				<div class="line"></div>
+			</div>
+		</div>
+		<div id="middle">
+			<div id="middle_left" style="margin-top:5px;">
+				<div class="left" style="margin-left:37px;">
+                	<ul>
+                    	<li class="left_title">【行业资讯】</li>
+                        <li class="left_link"><a href="news10.html">互联网将与实体经济不可...</a></li>
+                        <li class="left_link"><a href="news5.html">气象预报今后精细化各区...</a></li>
+                        <li class="left_link"><a href="news8.html">2012年通信业呈现五大...</a></li>
+                        <li class="left_link"><a href="news9.html">广东与中国气象局签署合...</a></li>
+                    </ul>
+                </div>
+                <div class="left" style="margin-left:37px;">
+                	<ul>
+                    	<li class="left_title">【团队活动】</li>
+                        <li class="left_link"><a href="news27.html">春游踏青 顺德长鹿农庄一日游</a></li>
+			<li class="left_link"><a href="news26.html">2014，你好！</a></li>
+                        <li class="left_link"><a href="news25.html">暖阳高照 踏雪寻梅</a></li>
+                        <li class="left_link"><a href="news24.html">围炉而坐 话烧烤</a></li>
+                    </ul>
+                </div>
+                <div class="left" style="margin-left:37px;">
+                	<ul>
+                    	<li class="left_title">【公司新闻】</li>
+                        <li class="left_link"><a href="news11.html">数鹏通科技2012年会举行</a></li>
+                        <li class="left_link"><a href="news12.html">公司网站龙年全新改版上线</a></li>
+                        <li class="left_link"><a href="news16.html">气象系统顺利通过验收</a></li>
+                        <li class="left_link"><a href="news18.html">2011中国云计算论坛在京召开</a></li>
+                    </ul>
+                </div>
+                <div class="left" style="margin-left:37px;">
+                	<ul>
+                    	<li class="left_title">【团队建设】</li>
+                        <li class="left_link"><a href="news20.html">迎亚运 公司组织火炉山烧烤</a></li>
+                    </ul>
+                </div>
+			</div>
+
+			<div class="middle_middle">
+				<span id="newslist_top" class="middle_title">新闻资讯</span>
+				<ul id="newslist">
+                	<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news27.html"><img class="info_img" src="images/news/news27-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news27.html">【团队活动】春游踏青 顺德长鹿农庄一日游</a><span class="publishtime">2014-04-08 15:33</span></div>
+									<p>　　春色怡人的3月份,我们相约顺德长鹿农庄，尽管当天出游的人很多，但我们的心情丝毫不受影响，在漫长的冬季之后，明媚的春日让我们的心情也分外灿烂。</p>
+								</div>
+							</div>
+						</div></li>
+                	<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news26.html"><img class="info_img" src="images/news/news26-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news26.html">【团队活动】拥抱变化 专业进取——2014，你好！</a><span class="publishtime">2014-01-19 20:30</span></div>
+									<p>时光飞逝，日月如梭，饱含收获的2013年匆匆过去了，充满机遇与挑战的2014年正迈着铿锵有力的步伐朝我们走来，2014年1月11日， “拥抱变化，专业进取——数鹏通科技2013年度总结暨2014展望”年会在清远篁胜温泉举行，总结过去一年的成就，带着对未来的憧憬，掀开我们崭新的一页！</p>
+								</div>
+							</div>
+						</div></li>
+                        <li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news10.html"><img class="info_img" src="images/news/news10-12.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news10.html">【行业资讯】互联网将与实体经济不可分割</a><span class="publishtime">2014-01-06 15:25</span></div>
+									<p>11月9日，腾讯董事会主席兼CEO马化腾在深圳出席2013年由腾讯公司举办的WE大会。会上，马化腾以互联网的七个路标为主题进行阐述，对互联网行业的未来展开讨论。</p>
+								</div>
+							</div>
+						</div></li>
+                	<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news25.html"><img class="info_img" src="images/news/news35-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news25.html">【团队活动】暖阳高照 踏雪寻梅</a><span class="publishtime">2014-01-03 17:30</span></div>
+									<p>广州的冬日，暖阳高照，却让人想念北方漫天飞舞的大雪，仿佛那才是冬天应有之景。于是，8090的兄弟姐妹们，趁着周末，决定以自己的方式在温暖的南方“踏雪寻梅”。</p>
+								</div>
+							</div>
+						</div></li>
+                        <li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news24.html"><img class="info_img" src="images/news/news24-1.png" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news24.html">【团队活动】围炉而坐 话烧烤</a><span class="publishtime">2013-11-22 17:12</span></div>
+									<p>11月，广州迎来短暂而凉爽的秋季。小时候，我们盼望秋游，如今，我们依然期待一群人围炉而坐，谈天说地；期待卸下平日的严肃，说说笑笑回归游戏。</p>
+								</div>
+							</div>
+						</div></li>
+                         <li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news23.html"><img class="info_img" src="images/news/news23-2.png" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news23.html">【团队活动】万圣节畅游长隆欢乐世界</a><span class="publishtime">2013-11-22 17:12</span></div>
+									<p>11月2日，我们研发一部一室的同事相约前往广州长隆欢乐世界，感受万圣节的鬼魅和欢乐世界的疯狂。当天的长隆欢乐世界，与往常最大的不同，是处处充满了万圣节的恐怖气氛...</p>
+								</div>
+							</div>
+						</div></li>
+                	<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news1.html"><img class="info_img" src="images/news/news1-5.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news1.html">【团队活动】长洲岛单车一日游</a><span class="publishtime">2013-02-04 14:44</span></div>
+									<p>“军港的夜啊静悄悄，海浪把战舰轻轻的摇。” 这是多年前的一首流传大江南北的军歌，而今天，我们一行人也来到了军港——长洲岛。太阳非常的狠毒，但是我们的兴致却丝毫未减。我们早早的来到码头集合，搭上了前往黄埔军校的渡轮。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news2.html"><img class="info_img" src="images/news/news2-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news2.html">【团队活动】蛇年南国桃园之旅</a><span class="publishtime">2013-02-04 14:44</span></div>
+									<p>2013年1月12日，踏着新年的脚步，数鹏通科技有限公司蛇年年会在南国桃园如期举行，大家踊跃参与其中，这天，阳光明媚，心情舒畅，一路欢歌笑语。怀着期待的心情来到著名的桃花之乡狮山镇松岗，佛山新八景之一的南国桃园旅游区。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news3.html"><img class="info_img" src="images/news/news3-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news3.html">【团队活动】2012数鹏通运动达人秀</a><span class="publishtime">2012-11-26 09:04</span></div>
+									<p>寒冬未到，数鹏通科技的运动达人秀抢先来到啦！！！</br>这年头，男的女的都兴上得了厅堂，下得了厨房，写得了代码，翻得了围墙。咱IT人怎么能输人？</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news4.html"><img class="info_img" src="images/news/news4-4.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news4.html">【团队活动】9月，到长隆跳“桑巴”</a><span class="publishtime">2012-09-07 14:38</span></div>
+									<p>9月1日的清晨，带着兴奋、激动、期盼的心情，数鹏通公司一行人浩浩荡荡的朝着长隆水上乐园出发。长隆，我们来了！！！</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news5.html"><img class="info_img" src="images/news/news16-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news5.html">【行业资讯】气象预报今后精细化各区将独立发布预警</a><span class="publishtime">2012-08-17 10:44</span></div>
+									<p>据报道，位于番禺大石街的广州市气象监测预警中心正式投入使用，伴随该中心的落成，新型探测系统、预报预警和应急信息发布系统也投入使用，广州市的气象精细化预报也将进入加速度。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news6.html"><img class="info_img" src="images/news/news6-4.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news6.html">【团队活动】阳江游记</a><span class="publishtime">2012-06-20 08:52</span></div>
+									<p>五月的清晨，怀着对大海的期待，带着对天气的担忧，阳江之旅正式启动。驱车四个多小时，终于到达了闸坡大角湾。</br>
+									碧海蓝天，水接云天天更远，川流沧海海方深。心旷神怡，欢呼雀跃！天气还是不错的，事实告诉我们天气预报，确实仅供参考。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news7.html"><img class="info_img" src="images/news/news7-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news7.html">【团队活动】初春三月 我们登山去！</a><span class="publishtime">2012-03-28 14:05</span></div>
+									<p>回南天让广州的三月轮番上演着春夏秋冬。3月24日，阳光灿烂，一扫多日的灰霾，在公司的组织下，我们一行人，齐齐前往白云山，和广州的春天约个会。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news8.html"><img class="info_img" src="images/news/news8-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news8.html">【行业资讯】2012年通信业呈现五大趋势</a><span class="publishtime">2012-03-16 08:57</span></div>
+									<p>【通信产业网讯】（记者 李传涛 巴塞罗那报道）当地时间2月27日，为期四天的2012世界移动通信大会拉开大幕。爱立信全球总裁兼CEO卫翰斯当天发表演讲并接受了通信产业报(网)专访。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news9.html"><img class="info_img" src="images/news/news9-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news9.html">【行业资讯】广东与中国气象局签署合作备忘录 涉多项尖端领域</a><span class="publishtime">2012-03-14 10:24</span></div>
+									<p>中新社广州3月12日电 (索有为 王宝莲 符信)12日，广东省政府与中国气象局在北京签署《关于加快气象现代化试点省建设合作备忘录》。根据本次签署的合作备忘录，双方将围绕推进区域数值天气预报国家重点实验室建设等方面进行合作。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news10.html"><img class="info_img" src="images/news/news10-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news10-2.html">【行业资讯】去年中国手机应用下载量增长298%</a><span class="publishtime">2012-02-22 13:38</span></div>
+									<p>北京时间2月22日早间消息，美国科技博客网站App Annie今天发布一张名为《应用星球崛起》(The Rise of the Planet of the Apps)的图表，汇总了与手机应用有关的统计数据。其中，中国成为应用下载量增长最快的国家，2011年的增幅高达298%。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news11.html"><img class="info_img" src="images/news/news11-1.png"/></a>
+								<div class="list_content">
+									<div class="title"><a href="news11.html">【公司活动】数鹏通科技2012年会举行</a><span class="publishtime">2012-01-16 15:47</span></div>
+									<p>时光飞逝，岁月如梭，转眼间忙碌的2011年已过去，充满期待和挑战的2012年向我们走来。2012年1月7～8日，数鹏通科技2012年会在南昆山举行。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news12.html"><img class="info_img" src="images/news/news12-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news12.html">【公司新闻】公司网站龙年全新改版上线</a><span class="publishtime">2012-01-05 23:33</span></div>
+									<p>时光飞逝，岁月如梭，转眼间忙碌的2011年已过去，充满期待和挑战的2012年向我们走来。2012年1月7～8日，数鹏通科技2012年会在南昆山举行。2012年1月1日，数鹏通科技的网站改版上线试运行，以全新面貌迎接龙年。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news13.html"><img class="info_img" src="images/news/news13-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news13.html">【团队活动】挥别兔年篮球对抗赛举行</a><span class="publishtime">2012-01-05 23:26</span></div>
+									<p>2011年12月下旬，数鹏通科技的篮球发烧友们相约东昇球馆，用汗水和活力迎接龙腾虎跃的2012年。</br>作为这次活动的组织者，小邝早早来到球场。 不多时，各路人马亦陆续抵达，篮球对抗赛正式开始。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news14.html"><img class="info_img" src="images/news/news14-2.png" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news14.html">【团队活动】秋意渐起 烧烤又至</a><span class="publishtime">2011-11-30 15:46</span></div>
+									<p>11月底，广州秋意渐起，烧烤正当时。早上起来，披上外衣，整顿行装，踏上了北上火炉山的征途。</br>来到公司集合点，只见活动组织者林大策划运筹帷幄，指点各路同志兵分三跟：先头部队分持刀枪剑戟、斧钺钩叉、苹果白菜、葡萄茄子...</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news15.html"><img class="info_img" src="images/news/news15-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news15.html">【行业资讯】2011中国国际信息通信展览会</a><span class="publishtime">2011-11-18 15:49</span></div>
+									<p>每年金秋时节举行的中国国际通信展现 在已发展成为亚洲规模最大、最具影响力的世界级信息通信展。与往届偏向通信技术和系统设备的纯科技类展会相比，随着3G业务的推广及智能手机的普及...</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news16.html"><img class="info_img" src="images/news/news16-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news16.html">【公司新闻】气象系统顺利通过验收</a><span class="publishtime">2011-11-18 15:48</span></div>
+									<p>我公司受气象部门委托开发的深圳世界大学生运动会气象系统、在线天气社区-大城市精细化预报服务系统等项目顺利通过验收。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news17.html"><img class="info_img" src="images/news/news17-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news17.html">【团队活动】到广州最美乡村赏油菜花</a><span class="publishtime">2011-11-18 15:43</span></div>
+									<p>到达“广州最美的乡村”——花都梯面镇红山村。红山村位于梯面镇西北部，是王子山山脚下一座小村庄，总面积14.3平方公里。梯面镇曾被专家形容为一朵脱离尘世的荷花，而红山村正处于这朵花的花心。赏油菜花，自由活动。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news18.html"><img class="info_img" src="images/news/news18-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news18.html">【公司新闻】2011中国云计算论坛在京召开</a><span class="publishtime">2011-11-18 15:43</span></div>
+									<p>2011年2月22日，“中国云计算产业发展高峰论坛”在北京成功举办。本届论坛由 中国电子信息产业发展研究院主办。在此次高峰论坛中，我公司与会代表针对发展战略性新兴产业背景和云计算现状...</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news19.html"><img class="info_img" src="images/news/news19-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news19.html">【行业资讯】未来10大移动应用趋势</a><span class="publishtime">2011-11-18 15:43</span></div>
+									<p>2月12日消息，据国外媒体报道，市场研究机构Gartner日前评出了十大移动应 用趋势。该机构预计，到2012年移动应用市场将高度竞争，并定义高端 设备用户体验。...</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news20.html"><img class="info_img" src="images/news/news20-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news20.html">【团队建设】迎亚运 公司组织火炉山烧烤</a><span class="publishtime">2011-11-18 15:40</span></div>
+									<p>2010年11月12日，亚运开幕式当日，公司组织广州软件开发部的员工到火炉山进行烧烤活动。</br>为保障亚运会、亚残会顺利进行，近两个月以来，参与客流引导、移动定位等项目的同事全身心投入，加班熬夜，为项目的按时按质地完成付出了努力。</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news21.html"><img class="info_img" src="images/news/news21-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news21.html">【公告通知】2011年会通知</a><span class="publishtime">2011-11-18 15:39</span></div>
+									<p>时间：2011年1月15日（本周六）9：30。</br>行程安排：...</p>
+								</div>
+							</div>
+						</div></li>
+					<li><div class="newslist_content">
+							<div class="newslist_info">
+								<a href="news22.html"><img class="info_img" src="images/news/news22-1.jpg" /></a>
+								<div class="list_content">
+									<div class="title"><a href="news22.html">【团队活动】白水寨团队活动纪事</a><span class="publishtime">2011-11-18 15:15</span></div>
+									<p>在七月里一个阳光灿烂的日子里，到中午那是相当的灿烂。软件开发中心广州一部的同事组织到增城白水寨的团队活动。早上八点半出发，路上行程稍微有一点不顺畅。为迎接广州亚运会道路建设工程比较多...</p>
+								</div>
+							</div>
+						</div></li>
+                </ul>
+				<div id="newslist_page">
+					<span class="street">
+						<!-- 生成页数 -->
+						<a href="#newslist_top">上一页</a>
+						<a class="current" href="#newslist_top">1</a>
+						<a href="#newslist_top">2</a>
+						<a href="#newslist_top">下一页</a>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="lineD">
+			<div class="lineout">
+				<div class="line"></div>
+			</div>
+		</div>
+		<div id="footer">
+			<div id="footer_content">
+				<div style="width: 100%; height: 210px;">
+					<img src="images/logo-1.png" />
+					<ul>
+						<li class="links">
+							<ul>
+								<li class="links_title">我们的服务</li>
+								<li class="link"><a href="service.html#service_businessConsulting">商业咨询</a></li>
+								<li class="link"><a href="service.html#service_softwareDevelopment">软件开发</a></li>
+								<li class="link"><a href="service.html#service_dataService">数据服务</a></li>
+								<li class="link"><a href="service.html#service_operationsManagementService">运营管理服务</a></li>
+							</ul>
+						</li>
+						<li class="links">
+							<ul>
+								<li class="links_title">我们的产品</li>
+								<li class="link"><a href="product_domain.html#product_ICD">智能计算领域</a></li>
+								<li class="link"><a href="product_domain.html#product_OMD">运营管理领域</a></li>
+								<li class="link"><a href="product_domain.html#product_GID">地理信息领域</a></li>
+								<li class="link"><a href="product_domain.html#product_MID">移动互联领域</a></li>
+							</ul>
+						</li>
+						<li class="links">
+							<ul>
+								<li class="links_title">联系方式</li>
+								<li class="link"><a href="mailto:sales@linkcm.com">销售业务sales@linkcm.com</a></li>
+								<li class="link"><a href="mailto:support@linkcm.com">售后服务support@linkcm.com</a></li>
+								<li class="link"><a href="mailto:hr@linkcm.com">人才招聘hr@linkcm.com</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div id="bottom">
+					<span class="street">粤ICP备11071503号-1<span>版权所有 &copy;广州数鹏通科技有限公司</span></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
